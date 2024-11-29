@@ -17,3 +17,10 @@ stages:
           vmImage: "ubuntu-latest"
         steps:
           - template: template/infra.yaml
+      - job: "BuildAndPushDockerImage"
+        dependsOn: "CreateInfra"
+        displayName: "Build-Push DockerImage"
+        pool:
+          vmImage: "ubuntu-latest"
+        steps:
+          - template: template/docker.yaml
