@@ -21,8 +21,7 @@ steps:
     backendAzureRmUseEnvironmentVariablesForAuthentication: false
     backendAzureRmUseEntraIdForAuthentication: false
     workingDirectory: terraform
-
-# Only runs if the 'terraformPlan' task has detected changes the in state. 
+ 
 - task: TerraformTaskV4@4
   displayName: Apply Terraform Plan
   condition: eq(variables['terraformPlan.changesPresent'], 'true')
