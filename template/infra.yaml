@@ -1,8 +1,13 @@
 steps:
 - task: AzureCLI@2
-  displayName: 'Azure Login'
+  displayName: Azure CLI
   inputs:
-    azureSubscription: 'azure-connection' # Authenticate with Azure using service connection
+    azureSubscription: 'azure-connection'
+    scriptType: 'bash'
+    scriptLocation: inlineScript
+    inlineScript: |
+      az --version
+      az account show
 
 - script: |
     pwd
