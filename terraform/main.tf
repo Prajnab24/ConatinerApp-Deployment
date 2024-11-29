@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 3.0.2"
+      version = "3.43.0"
     }
   }
   backend "azurerm" {
@@ -52,7 +52,7 @@ resource "azurerm_container_app_environment" "crudappenv" {
   log_analytics_workspace_id = azurerm_log_analytics_workspace.crudwkspace.id
 }
 
-resource "azurerm_container_app" "frontendcontainerapp" {
+resource "azurerm_container_app" "crudcontainerapp" {
   name                         = "crudapp-v1"
   container_app_environment_id = azurerm_container_app_environment.crudappenv.id
   resource_group_name          = var.resource_group_name
