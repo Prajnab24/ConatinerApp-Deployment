@@ -6,7 +6,7 @@ steps:
     azureSubscription: 'azure-connection'
     imageName: 'crudapp:$(imageTag)'
     tags: '$(imageTag)'
-    azureContainerRegistry: '{"loginServer":"crudappimages.azurecr.io", "id" : "/subscriptions/$(subscirption)/resourceGroups/my-complete-project/providers/Microsoft.ContainerRegistry/registries/crudappimages"}'
+    azureContainerRegistry: '{"loginServer":"crudappimages.azurecr.io", "id" : "/subscriptions/f2aa04c1-3f6e-47b8-a646-492659d08fcf/resourceGroups/my-complete-project/providers/Microsoft.ContainerRegistry/registries/crudappimages"}'
     dockerFile: 'SimpleCrud/Dockerfile'
 
 - task: Docker@0
@@ -15,5 +15,5 @@ steps:
     azureSubscription: 'azure-connection'
     imageName: 'crudapp:$(imageTag)'
     tags: '$(imageTag)'
-    azureContainerRegistry: '{"loginServer":"crudappimages.azurecr.io", "id" : "/subscriptions/$(subscirption)/resourceGroups/my-complete-project/providers/Microsoft.ContainerRegistry/registries/crudappimages"}'
+    azureContainerRegistry: '{"loginServer":"crudappimages.azurecr.io", "id" : "/subscriptions/f2aa04c1-3f6e-47b8-a646-492659d08fcf/resourceGroups/my-complete-project/providers/Microsoft.ContainerRegistry/registries/crudappimages"}'
     action: 'Push an image'
