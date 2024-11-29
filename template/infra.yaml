@@ -4,13 +4,19 @@ steps:
     az account set --subscription $(subscirption)
 
 - script: |
+    pwd
+    cd terraform
     terraform init
     terraform validate
   displayName: 'Terraform Init and Validate'
  
-- script: terraform plan
+- script: |
+    pwd
+    terraform plan
   displayName: 'Terraform Plan'
  
-- script: terraform apply  -auto-approve
+- script: |
+    pwd
+    terraform apply  -auto-approve
   displayName: 'Terraform Apply'
   condition: succeeded()
