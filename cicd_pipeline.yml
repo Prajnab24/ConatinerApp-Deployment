@@ -1,0 +1,19 @@
+trigger:
+  branches:
+    include:
+      - master
+
+variables:
+  imageTag: "$(Build.BuildId)" # Using The Build ID as Tag
+  environment: "dev" 
+
+stages:
+  - stage: "DEV"
+    displayName: "Deploy to DEV"
+    jobs:
+      - job: "CreateInfra"
+        displayName: "Creating Infrastructure"
+        pool:
+          vmImage: "ubuntu-latest"
+        steps:
+          - template: template/infra.yaml
