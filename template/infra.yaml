@@ -1,27 +1,11 @@
 steps:
+- task: TerraformInstaller@0
+  inputs:
+    terraformVersion: 'latest'
 - script: |
-    az login
-    az account set --subscription $(subscirption)
+    terraform --version
+    terraform init 
+    terraform plan -out=tfplan
+    terraform apply -auto-approve tfplan
+  displayName: 'Terraform Init and Plan and Apply'
 
-- script: |
-    pwd
-    cd terraform
-    pwd
-    terraform init
-    terraform validate
-  displayName: 'Terraform Init and Validate'
- 
-- script: |
-    pwd
-    cd terraform
-    pwd
-    terraform plan
-  displayName: 'Terraform Plan'
- 
-- script: |
-    pwd
-    cd terraform
-    pwd
-    terraform apply  -auto-approve
-  displayName: 'Terraform Apply'
-  condition: succeeded()

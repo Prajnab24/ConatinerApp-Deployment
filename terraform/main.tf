@@ -18,6 +18,14 @@ provider "azurerm" {
   features {}
 }
 
+resource "azurerm_storage_account" "tffile_storage_account" {
+  name                     = "ahgvhgwefdsdaa"
+  resource_group_name      = azurerm_resource_group.resource_group_name.name
+  location                 = var.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}
+
 resource "azurerm_container_registry" "conatiner_registry_images" {
   name                = var.conatiner_registry_crudoperation
   resource_group_name      =  var.resource_group_name
