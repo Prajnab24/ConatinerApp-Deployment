@@ -20,7 +20,7 @@ provider "azurerm" {
 
 resource "azurerm_storage_account" "tffile_storage_account" {
   name                     = "ahgvhgwefdsdaa"
-  resource_group_name      = azurerm_resource_group.resource_group_name.name
+  resource_group_name      = var.resource_group_name
   location                 = var.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
