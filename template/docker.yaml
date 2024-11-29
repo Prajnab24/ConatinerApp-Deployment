@@ -13,7 +13,7 @@ steps:
   displayName: 'Push crud image'
   inputs:
     azureSubscription: 'azure-connection'
-    imageName: 'gcbot:$(imageTag)'
+    imageName: 'crudapp:$(imageTag)'
     tags: '$(imageTag)'
     azureContainerRegistry: '{"loginServer":"crudappimages.azurecr.io", "id" : "/subscriptions/f2aa04c1-3f6e-47b8-a646-492659d08fcf/resourceGroups/my-complete-project/providers/Microsoft.ContainerRegistry/registries/crudappimages"}'
     action: 'Push an image'
