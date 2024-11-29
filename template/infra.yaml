@@ -1,20 +1,35 @@
 steps:
-- task: AzureCLI@2
-  displayName: Azure CLI
+- task: TerraformTaskV4@4
+  displayName: Initialize Terraform
   inputs:
-    azureSubscription: 'azure-connection'
-    scriptType: 'bash'
-    scriptLocation: inlineScript
-    inlineScript: |
-      az --version
-      az account show
-      pwd
-      cd terraform
-      pwd
-      terraform init
-      terraform validate
-      terraform plan
-      terraform apply  -auto-approve
+    provider: 'azurerm'
+    command: 'init'
+    backendServiceArm: 'azure-connection'
+    backendAzureRmResourceGroupName: 'my-complete-project'
+    backendAzureRmStorageAccountName: 'saveterraformfilesttf'
+    backendAzureRmContainerName: 'stterraform'
+    backendAzureRmKey: 'terraform.tfstate'
+    workingDirectory: terraform
 
+- task: TerraformTaskV4@4
+  name: terraformPlan
+  displayName: Create Terraform Plan
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    environmentServiceNameAzureRM: 'azure-connection'
+    backendAzureRmUseEnvironmentVariablesForAuthentication: false
+    backendAzureRmUseEntraIdForAuthentication: false
+    workingDirectory: terraform
 
-
+# Only runs if the 'terraformPlan' task has detected changes the in state. 
+- task: TerraformTaskV4@4
+  displayName: Apply Terraform Plan
+  condition: eq(variables['terraformPlan.changesPresent'], 'true')
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    environmentServiceNameAzureRM: 'azure-connection'
+    backendAzureRmUseEnvironmentVariablesForAuthentication: false
+    backendAzureRmUseEntraIdForAuthentication: false
+    workingDirectory: terraform

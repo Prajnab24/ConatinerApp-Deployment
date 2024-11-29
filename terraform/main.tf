@@ -9,7 +9,7 @@ terraform {
       resource_group_name  = "my-complete-project"
       storage_account_name =  "saveterraformfilesttf"
       container_name       = "stterraform"
-      key                  = "terraform.tfstate"
+      key                  = "stterraform"
   }
 
 }
