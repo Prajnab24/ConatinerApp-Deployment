@@ -4,6 +4,7 @@ variable location {
 variable resource_group_name {        
     default = "my-complete-project"
 }
+
 variable storage_account_name {
     default = "saveterraformfilesttf"
 }
