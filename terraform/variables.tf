@@ -14,3 +14,9 @@ variable conatiner_storage_account_name{
 variable conatiner_registry_crudoperation{
     default = "crudappimages"
 }
+variable envname {
+    default = "crudenv"
+}
+variable workspace_name {
+    default = "crudworkspaceapp"
+}

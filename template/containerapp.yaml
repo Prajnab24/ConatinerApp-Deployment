@@ -1,0 +1,13 @@
+steps:
+
+- task: AzureContainerApps@1
+  displayName: 'Azure frontend Container Apps Deploy'
+  inputs:
+    azureSubscription: 'azure-connection'
+    imageToDeploy: 'crudappimages.azurecr.io/crudapp:$(imageTag)'
+    containerAppName: 'crudapp-v1'
+    resourceGroup: 'my-complete-project'
+    containerAppEnvironment : crudenv
+    targetPort: 8000
+    ingress: external
+    disableTelemetry: false

@@ -1,35 +1,27 @@
 steps:
-- task: TerraformTaskV4@4
-  displayName: Initialize Terraform
-  inputs:
-    provider: 'azurerm'
-    command: 'init'
-    backendServiceArm: 'azure-connection'
-    backendAzureRmResourceGroupName: 'my-complete-project'
-    backendAzureRmStorageAccountName: 'saveterraformfilesttf'
-    backendAzureRmContainerName: 'stterraform'
-    backendAzureRmKey: 'terraform.tfstate'
-    workingDirectory: terraform
+- script: |
+    az login
+    az account set --subscription $(subscirption)
 
-- task: TerraformTaskV4@4
-  name: terraformPlan
-  displayName: Create Terraform Plan
-  inputs:
-    provider: 'azurerm'
-    command: 'plan'
-    environmentServiceNameAzureRM: 'azure-connection'
-    backendAzureRmUseEnvironmentVariablesForAuthentication: false
-    backendAzureRmUseEntraIdForAuthentication: false
-    workingDirectory: terraform
-
-# Only runs if the 'terraformPlan' task has detected changes the in state. 
-- task: TerraformTaskV4@4
-  displayName: Apply Terraform Plan
-  condition: eq(variables['terraformPlan.changesPresent'], 'true')
-  inputs:
-    provider: 'azurerm'
-    command: 'apply'
-    environmentServiceNameAzureRM: 'azure-connection'
-    backendAzureRmUseEnvironmentVariablesForAuthentication: false
-    backendAzureRmUseEntraIdForAuthentication: false
-    workingDirectory: terraform
+- script: |
+    pwd
+    cd terraform
+    pwd
+    terraform init
+    terraform validate
+  displayName: 'Terraform Init and Validate'
+ 
+- script: |
+    pwd
+    cd terraform
+    pwd
+    terraform plan
+  displayName: 'Terraform Plan'
+ 
+- script: |
+    pwd
+    cd terraform
+    pwd
+    terraform apply  -auto-approve
+  displayName: 'Terraform Apply'
+  condition: succeeded()

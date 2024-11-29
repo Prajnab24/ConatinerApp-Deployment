@@ -24,5 +24,7 @@ stages:
           vmImage: "ubuntu-latest"
         steps:
           - template: template/docker.yaml
-
-
+      - job: "ConatineApp" #Deploying ContainerApp
+        dependsOn: "BuildAndPushDockerImage" 
+        steps:
+          - template: template/containerapp.yaml
