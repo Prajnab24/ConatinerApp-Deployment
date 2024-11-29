@@ -5,6 +5,12 @@ terraform {
       version = "~> 3.0.2"
     }
   }
+  backend "azurerm" {
+      resource_group_name  = var.resource_group_name
+      storage_account_name = var.storage_account_name
+      container_name       = var.conatiner_storage_account_name
+      key                  = "terraform.tfstate"
+  }
 
 }
 
@@ -12,6 +18,25 @@ provider "azurerm" {
   features {}
 }
 
+resource "azurerm_container_registry" "conatiner_registry_images" {
+  name                = var.conatiner_registry_crudoperation
+  resource_group_name      =  var.resource_group_name
+  location                 = var.location
+  sku                 = "Premium"
+  admin_enabled       = true
+  georeplications {
+    location                = "East Asia"
+    zone_redundancy_enabled = true
+    tags                    = {}
+  }
+  georeplications {
+    location                = "North Europe"
+    zone_redundancy_enabled = true
+    tags                    = {}
+  }
+}
+
+/*
 resource "azurerm_resource_group" "resource_group_name" {
   name     = var.resource_group_name
   location = var.location
@@ -30,3 +55,4 @@ resource "azurerm_storage_container" "tffileconatiner" {
   storage_account_name  = azurerm_storage_account.tffile_storage_account.name
   container_access_type = "private"
 }
+*/

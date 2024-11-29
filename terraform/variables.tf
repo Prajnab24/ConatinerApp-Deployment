@@ -10,4 +10,6 @@ variable storage_account_name {
 variable conatiner_storage_account_name{
     default = "stterraform"
 }
-
+variable conatiner_registry_crudoperation{
+    default = "crudappimages"
+}
