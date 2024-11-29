@@ -1,11 +1,35 @@
 steps:
-- task: TerraformInstaller@0
+- task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV4@4
+  displayName: 'Terraform : azurerm'
   inputs:
-    terraformVersion: 'latest'
-- script: |
-    terraform --version
-    terraform init 
-    terraform plan -out=tfplan
-    terraform apply -auto-approve tfplan
-  displayName: 'Terraform Init and Plan and Apply'
+    command: init 
+    backendAzureRmUseEnvironmentVariablesForAuthentication: false
+    backendAzureRmUseEntraIdForAuthentication: false
+    backendServiceArm: azure-connection
+    backendAzureRmResourceGroupName: 'my-complete-project'
+    backendAzureRmStorageAccountName: saveterraformfilesttf
+    backendAzureRmContainerName: stterraform
+    backendAzureRmKey:  terraformbackend/tfstate
+    workingDirectory: terraform
+    
+- task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV4@4
+  displayName: 'Terraform : azurerm'
+  inputs:
+    command: plan 
+    environmentServiceNameAzureRM: azure-connection
+    backendAzureRmUseEnvironmentVariablesForAuthentication: false
+    backendAzureRmUseEntraIdForAuthentication: false
+    workingDirectory: terraform
+    
+- task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV4@4
+  displayName: 'Terraform : azurerm'
+  inputs:
+    command: apply 
+    environmentServiceNameAzureRM: azure-connection
+    backendAzureRmUseEnvironmentVariablesForAuthentication: false
+    backendAzureRmUseEntraIdForAuthentication: false
+    workingDirectory: terraform
+
+
+
 
