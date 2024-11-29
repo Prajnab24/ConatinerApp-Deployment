@@ -8,29 +8,13 @@ steps:
     inlineScript: |
       az --version
       az account show
-
-- script: |
-    pwd
-    cd terraform
-    pwd
-    terraform init
-    terraform validate
-  displayName: 'Terraform Init and Validate'
- 
-- script: |
-    pwd
-    cd terraform
-    pwd
-    terraform plan
-  displayName: 'Terraform Plan'
- 
-- script: |
-    pwd
-    cd terraform
-    pwd
-    terraform apply  -auto-approve
-  displayName: 'Terraform Apply'
-  condition: succeeded()
+      pwd
+      cd terraform
+      pwd
+      terraform init
+      terraform validate
+      terraform plan
+      terraform apply  -auto-approve
 
 
 
